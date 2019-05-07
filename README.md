@@ -9,6 +9,7 @@ i3blocks
 rofi
 feh
 neofetch
+compton
 
 
 fonts: https://github.com/supermarin/YosemiteSanFranciscoFont

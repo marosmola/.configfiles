@@ -205,6 +205,7 @@ bindsym $ms+e exec setxkbmap us
 
 # Startup applications
 exec slack
+exec --no-startup-id compton
 # exec_always blueman-applet 
 
 for_window [class=".*"] border pixel 0
