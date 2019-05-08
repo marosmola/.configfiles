@@ -10,6 +10,7 @@ rofi
 feh
 neofetch
 compton
+nvidia
 
 
 fonts: https://github.com/supermarin/YosemiteSanFranciscoFont
