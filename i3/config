@@ -13,7 +13,7 @@ set $mod Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:DejaVu Sans Mono for Powerline Book 9
+font pango:Hack 9
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -30,7 +30,8 @@ font pango:DejaVu Sans Mono for Powerline Book 9
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+#bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec gnome-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -93,12 +94,11 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-set $workspace1 "1"
-set $workspace9 "9[]"
-set $workspace10 "10[]"
+set $slack-ws 9
+set $spotify-ws 10
 
 # switch to workspace
-bindsym $mod+1 workspace $workspace1
+bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3
 bindsym $mod+4 workspace 4
@@ -106,11 +106,11 @@ bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace $workspace9
-bindsym $mod+0 workspace $workspace10
+bindsym $mod+9 workspace $slack-ws
+bindsym $mod+0 workspace $spotify-ws
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+1 move container to workspace 1
 bindsym $mod+Shift+2 move container to workspace 2
 bindsym $mod+Shift+3 move container to workspace 3
 bindsym $mod+Shift+4 move container to workspace 4
@@ -118,12 +118,12 @@ bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace $workspace9
-bindsym $mod+Shift+0 move container to workspace $workspace10
+bindsym $mod+Shift+9 move container to workspace $slack-ws
+bindsym $mod+Shift+0 move container to workspace $spotify-ws
 
 
-assign [class="Slack"] $workspace9
-assign [class="Spotify"] $workspace10
+assign [class="Slack"] $slack-ws
+assign [class="Spotify"] $spotify-ws
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -160,18 +160,18 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-  	status_command SCRIPT_DIR=/home/maro/.config/i3blocks i3blocks 
-	colors {
-		background $bg-color
-	    separator #757575
-		#                  border             background         text
-		focused_workspace  $bg-color          $bg-color          $text-color            
-		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-	}
-    position top
-}
+#  bar {
+#    	status_command SCRIPT_DIR=/home/maro/.config/i3blocks i3blocks 
+#  	colors {
+#  		background $bg-color
+#  	    separator #757575
+#  		#                  border             background         text
+#  		focused_workspace  $bg-color          $bg-color          $text-color            
+#  		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+#  		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+#  	}
+#      position top
+#  }
 
 bindsym $mod+shift+x exec i3lock
 
@@ -189,28 +189,34 @@ bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN
 bindsym XF86MonBrightnessUp exec light -A 5 # increase screen brightness
 bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
 
-exec_always feh --bg-scale Pictures/think.png
-exec nm-applet
-
-
-set $bg-color 	         #2f343f
-set $inactive-bg-color   #2f343f
+set $bg-color 	         #373b42
+set $inactive-bg-color   #1d1f21
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
 set $urgent-bg-color     #E53935
 
 # window colors
-client.focused          $bg-color           $bg-color          $text-color          #ff0000
-client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color #ff0000
-client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color #ff0000
-client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #ff0000
+client.focused          $bg-color           $bg-color          $text-color          #cc6666
+client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color #cc6666
+client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color #cc6666
+client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #cc6666
 
+# set keyboard shortcut for xkeyboard
 set $ms Mod4
 bindsym $ms+s exec setxkbmap sk
 bindsym $ms+e exec setxkbmap us
 
 # Startup applications
+exec_always feh --bg-scale Pictures/think.png
+exec nm-applet
 exec slack
-exec_always blueman-applet 
-new_window 1pixel
+exec_always kdeconnect-indicator
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
+gaps inner 5
+# gaps outer 10
+new_window pixel 2
+
+# alt -tab
+bindsym $mod+Tab                workspace prev
+bindsym $mod+Shift+Tab          workspace next 
