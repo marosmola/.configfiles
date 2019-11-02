@@ -4,13 +4,12 @@
 xorg xorg-xinit
 pulseaudio pulseaudio-alsa alsa-utils
 i3-gaps
-i3status
-i3blocks
 rofi
 feh
 neofetch
 compton
-nvidia
 
+light amixer
 
-fonts: https://github.com/supermarin/YosemiteSanFranciscoFont
+font: https://github.com/supermarin/YosemiteSanFranciscoFont
+font: Inconsolata 15
