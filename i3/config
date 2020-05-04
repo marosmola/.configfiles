@@ -24,7 +24,7 @@ bindsym $mod+Return exec gnome-terminal
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec rofi -show run
+bindsym $mod+d exec rofi -show drun
 
 # change focus
 bindsym $mod+j focus left
@@ -155,7 +155,7 @@ bindsym $mod+r mode "resize"
 #      position top
 #  }
 
-bindsym $mod+shift+x exec i3lock
+bindsym $mod+shift+x exec betterlockscreen -l
 
 # change volume or toggle mute
 bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+10 i3blocks 
@@ -163,8 +163,8 @@ bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -R
 bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+10 i3blocks
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec light -A 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
 
 set $bg-color 	         #373b42
 set $inactive-bg-color   #1d1f21
@@ -184,9 +184,9 @@ bindsym $ms+s exec setxkbmap sk
 bindsym $ms+e exec setxkbmap us
 
 # Set gaps
-#gaps inner 5
+gaps inner 5
 #gaps outer 5
-new_window pixel 2
+new_window pixel 0
 
 # alt -tab
 bindsym $mod+Tab                workspace prev
@@ -199,10 +199,13 @@ bindsym $mod+Shift+Tab          workspace next
 # exec nm-applet
 # exec slack
 # exec_always kdeconnect-indicator
-# exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
 exec_always --no-startup-id gnome-power-manager
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id gnome-flashback
-exec_always --no-startup-id xfce4-panel --disable-wm-check
+exec_always --no-startup-id nm-applet
+exec --no-startup-id compton -b --config ~/.config/compton/compton.conf --focus-exclude '_NET_WM_NAME@:s = "rofi"'
+
+bindsym $mod+n exec /home/maro/.config/nmcli-rofi/nmcli-rofi 

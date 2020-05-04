@@ -18,7 +18,7 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #1d1f21
+background = #000 
 background-alt = #444
 ;foreground = ${xrdb:color7:#222}
 foreground = #c5c8c6
@@ -51,10 +51,12 @@ font-3 = Font Awesome 5 Brands:pixelsize=12;3
 
 modules-left = i3
 modules-center = date
-modules-right = xkeyboard pulseaudio battery powermenu 
+;modules-right = xkeyboard pulseaudio battery powermenu 
+modules-right = powermenu 
 
 tray-position = right
 tray-padding = 2
+wm-restack = i3
 
 cursor-click = pointer
 cursor-scroll = ns-resize
