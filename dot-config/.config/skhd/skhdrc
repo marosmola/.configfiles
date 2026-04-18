@@ -12,6 +12,12 @@ ctrl - down : yabai -m window --focus stack.next || yabai -m window --focus sout
 ctrl - up : yabai -m window --focus stack.prev || yabai -m window --focus north
 
 
+# move
+ctrl + shift - left : yabai -m window --warp west
+ctrl + shift - right : yabai -m window --warp east
+ctrl + shift - down : yabai -m window --warp south
+ctrl + shift - up : yabai -m window --warp north
+
 ctrl + alt - left : yabai -m window --focus west || yabai -m window --focus north
 ctrl + alt - right : yabai -m window --focus east || yabai -m window --focus south
 

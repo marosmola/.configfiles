@@ -25,10 +25,10 @@ c.appearance.vertSpacing              = 1.2                 -- Amount of vertica
 
 c.appearance.offset                   = {}                  -- Offset controls position of stack indicators relative to the window
 c.appearance.offset.y                 = 2                   -- Distance from top of the window to render indicators
-c.appearance.offset.x                 = 4                   -- Distance away from the edge of the window to render indicators
+c.appearance.offset.x                 = 20                   -- Distance away from the edge of the window to render indicators
 
-c.appearance.shouldFade               = true                -- Enable/disable fade animations
-c.appearance.fadeDuration             = 0.2                 -- Duration of fade animations (seconds)
+c.appearance.shouldFade               = false               -- Enable/disable fade animations
+c.appearance.fadeDuration             = 0                   -- Duration of fade animations (seconds)
 
 -- Features
 c.features.clickToFocus               = true                -- Click indicator to focus window. Mouse clicks are tracked when enabled
