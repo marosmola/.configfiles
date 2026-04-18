@@ -1,0 +1,36 @@
+#!/bin/bash
+
+sketchybar --bar \
+  height=28 \
+  position=bottom \
+  color=0xff000000 \
+  border_width=0 \
+  padding_left=12 \
+  padding_right=12
+
+sketchybar --default \
+  label.font="SF Mono:Regular:12.0" \
+  label.color=0xff555555 \
+  padding_left=6 \
+  padding_right=6
+
+# Custom event for yabai window focus
+sketchybar --add event yabai_focus_change
+
+# Spaces
+for i in $(seq 1 6); do
+  sketchybar --add item "space.$i" left \
+    --set "space.$i" \
+      label="$i" \
+      click_script="yabai -m space --focus $i" \
+      script="$CONFIG_DIR/plugins/space.sh" \
+    --subscribe "space.$i" space_change
+done
+
+# Yabai state: layout + focused window float state
+sketchybar --add item yabai_mode right \
+  --set yabai_mode \
+    script="$CONFIG_DIR/plugins/yabai_mode.sh" \
+  --subscribe yabai_mode space_change yabai_focus_change
+
+sketchybar --update
