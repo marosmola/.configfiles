@@ -1,0 +1,2 @@
+#!/bin/bash
+borders active_color=0xffffffff inactive_color=0xff333333 width=2.0
