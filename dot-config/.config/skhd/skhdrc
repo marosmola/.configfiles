@@ -1,7 +1,8 @@
 ctrl + shift - r : yabai --load-config
 
 # general
-ctrl - e : yabai -m space --layout toggle
+ctrl - e : LAYOUT=$(yabai -m query --spaces --space | jq -r '.type'); if [ "$LAYOUT" = "bsp" ]; then yabai -m space --layout float; else yabai -m space --layout bsp; fi; sketchybar --trigger yabai_focus_change
+ctrl + shift - e : LAYOUT=$(yabai -m query --spaces | jq -r '.[0].type'); if [ "$LAYOUT" = "bsp" ]; then for i in $(seq 1 6); do yabai -m space $i --layout float; done; pkill borders; else for i in $(seq 1 6); do yabai -m space $i --layout bsp; done; borders active_color=0xffffffff inactive_color=0xff444444 width=4.0 & fi; sketchybar --trigger yabai_focus_change
 ctrl - s : ~/.local/bin/yabai-stack-last
 ctrl - b : yabai -m space --balance
 
@@ -35,10 +36,10 @@ ctrl + shift - 4 : yabai -m window --space 4
 ctrl + shift - 5 : yabai -m window --space 5
 ctrl + shift - 6 : yabai -m window --space 6
 
-ctrl - f : yabai -m window --toggle float
+ctrl - f : yabai -m window --toggle float && sketchybar --trigger yabai_focus_change
 ctrl - t : yabai -m window --toggle split
 
-cmd - return : /Applications/Ghostty.app/Contents/MacOS/ghostty
+cmd - return : open -na /Applications/Ghostty.app
 
 cmd - tab : yabai -m window --focus recent
 

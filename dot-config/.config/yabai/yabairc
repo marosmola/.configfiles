@@ -15,8 +15,6 @@ yabai -m config mouse_action2 resize
 yabai -m config mouse_drop_action stack
 
 
-# refocus on window close
-yabai -m signal --add event=window_destroyed action="yabai -m window --focus recent || yabai -m window --focus first"
 
 # update sketchybar on window focus
 yabai -m signal --add event=window_focused action="sketchybar --trigger yabai_focus_change"

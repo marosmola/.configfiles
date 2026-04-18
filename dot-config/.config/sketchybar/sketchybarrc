@@ -17,6 +17,12 @@ sketchybar --default \
 # Custom event for yabai window focus
 sketchybar --add event yabai_focus_change
 
+# Yabai state: layout + focused window float state
+sketchybar --add item yabai_mode left \
+  --set yabai_mode \
+    script="$CONFIG_DIR/plugins/yabai_mode.sh" \
+  --subscribe yabai_mode space_change yabai_focus_change
+
 # Spaces
 for i in $(seq 1 6); do
   sketchybar --add item "space.$i" left \
@@ -26,11 +32,5 @@ for i in $(seq 1 6); do
       script="$CONFIG_DIR/plugins/space.sh" \
     --subscribe "space.$i" space_change
 done
-
-# Yabai state: layout + focused window float state
-sketchybar --add item yabai_mode right \
-  --set yabai_mode \
-    script="$CONFIG_DIR/plugins/yabai_mode.sh" \
-  --subscribe yabai_mode space_change yabai_focus_change
 
 sketchybar --update
