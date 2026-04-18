@@ -14,6 +14,9 @@ yabai -m config mouse_drop_action stack
 # Raycast space indicator — updates menu bar on space change
 yabai -m signal --add event=space_changed action="nohup open -g raycast://extensions/krzysztoff1/yabai/screens-menu-bar?launchType=background > /dev/null 2>&1 &"
 
+# refocus on window close
+yabai -m signal --add event=window_destroyed action="yabai -m window --focus recent || yabai -m window --focus first"
+
 # remember last focused tiled window for quick stacking
 yabai -m signal --add event=window_focused action="$HOME/.local/bin/yabai-record-last-tiled"
 
@@ -40,5 +43,4 @@ yabai -m space 5 --label "scratch"
 yabai -m space 6 --label "tmp"
 
 # Ignore
-yabai -m rule --add app=".*" manage=off
 yabai -m rule --add app='System Settings' manage=off

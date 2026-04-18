@@ -36,6 +36,9 @@ ctrl + shift - 5 : yabai -m window --space 5
 ctrl + shift - 6 : yabai -m window --space 6
 
 ctrl - f : yabai -m window --toggle float
+ctrl - t : yabai -m window --toggle split
+
+cmd - return : /Applications/Ghostty.app/Contents/MacOS/ghostty
 
 cmd - tab : yabai -m window --focus recent
 
