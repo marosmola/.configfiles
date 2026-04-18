@@ -1,0 +1,43 @@
+yabai -m config debug_output on
+
+yabai -m config top_padding    10
+yabai -m config bottom_padding 10
+yabai -m config left_padding   25
+yabai -m config right_padding  10
+yabai -m config window_gap     10
+
+yabai -m config mouse_modifier ctrl
+yabai -m config mouse_action1 move
+yabai -m config mouse_action2 resize
+yabai -m config mouse_drop_action stack
+
+# Raycast space indicator — updates menu bar on space change
+yabai -m signal --add event=space_changed action="nohup open -g raycast://extensions/krzysztoff1/yabai/screens-menu-bar?launchType=background > /dev/null 2>&1 &"
+
+# remember last focused tiled window for quick stacking
+yabai -m signal --add event=window_focused action="$HOME/.local/bin/yabai-record-last-tiled"
+
+# ensure spaces exist
+yabai -m space --create
+yabai -m space --create
+yabai -m space --create
+yabai -m space --create
+
+# layouts
+yabai -m config --space 1 layout bsp
+yabai -m config --space 2 layout float
+yabai -m config --space 3 layout float
+yabai -m config --space 4 layout float
+yabai -m config --space 5 layout float
+yabai -m config --space 6 layout float
+
+# labels
+yabai -m space 1 --label "dev"
+yabai -m space 2 --label "web"
+yabai -m space 3 --label "chat"
+yabai -m space 4 --label "personal"
+yabai -m space 5 --label "scratch"
+yabai -m space 6 --label "tmp"
+
+# Ignore
+yabai -m rule --add app='System Settings' manage=off

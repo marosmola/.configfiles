@@ -1,0 +1,7 @@
+#!/bin/bash
+CURRENT=$(yabai -m query --spaces --space | jq -r '.type')
+case "$CURRENT" in
+  bsp)    yabai -m space --layout stack ;;
+  stack)  yabai -m space --layout float ;;
+  float)  yabai -m space --layout bsp ;;
+esac

@@ -1,0 +1,18 @@
+#!/bin/bash
+STATE_DIR="$HOME/.local/state"
+CUR_FILE="$STATE_DIR/yabai-current-tiled-window"
+PREV_FILE="$STATE_DIR/yabai-last-tiled-window"
+mkdir -p "$STATE_DIR"
+WIN_JSON=$(yabai -m query --windows --window 2>/dev/null) || exit 0
+IS_FLOAT=$(printf '%s' "$WIN_JSON" | jq -r '."is-floating"')
+IS_MIN=$(printf '%s' "$WIN_JSON" | jq -r '."is-minimized"')
+ID=$(printf '%s' "$WIN_JSON" | jq -r '.id')
+if [ "$IS_FLOAT" = "false" ] && [ "$IS_MIN" = "false" ] && [ -n "$ID" ] && [ "$ID" != "null" ]; then
+  if [ -f "$CUR_FILE" ]; then
+    CUR=$(cat "$CUR_FILE")
+    if [ -n "$CUR" ] && [ "$CUR" != "$ID" ]; then
+      printf '%s' "$CUR" > "$PREV_FILE"
+    fi
+  fi
+  printf '%s' "$ID" > "$CUR_FILE"
+fi

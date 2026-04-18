@@ -1,0 +1,17 @@
+#!/bin/bash
+STATE_FILE="$HOME/.local/state/yabai-last-tiled-window"
+[ -f "$STATE_FILE" ] || exit 0
+TARGET=$(cat "$STATE_FILE")
+WIN_JSON=$(yabai -m query --windows --window) || exit 0
+CURRENT=$(printf '%s' "$WIN_JSON" | jq -r '.id')
+IS_FLOAT=$(printf '%s' "$WIN_JSON" | jq -r '."is-floating"')
+[ -n "$TARGET" ] || exit 0
+[ "$TARGET" = "$CURRENT" ] && exit 0
+
+# If current window is floating, make it managed first.
+if [ "$IS_FLOAT" = "true" ]; then
+  yabai -m window --toggle float || exit 1
+  sleep 0.1
+fi
+
+yabai -m window --stack "$TARGET"
