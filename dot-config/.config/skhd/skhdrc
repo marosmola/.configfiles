@@ -2,7 +2,7 @@ ctrl + shift - r : yabai --load-config
 
 # general
 ctrl - e : LAYOUT=$(yabai -m query --spaces --space | jq -r '.type'); if [ "$LAYOUT" = "bsp" ]; then yabai -m space --layout float; else yabai -m space --layout bsp; fi; sketchybar --trigger yabai_focus_change
-ctrl + shift - e : LAYOUT=$(yabai -m query --spaces | jq -r '.[0].type'); if [ "$LAYOUT" = "bsp" ]; then for i in $(seq 1 6); do yabai -m space $i --layout float; done; pkill borders; else for i in $(seq 1 6); do yabai -m space $i --layout bsp; done; borders active_color=0xffffffff inactive_color=0xff444444 width=4.0 & fi; sketchybar --trigger yabai_focus_change
+ctrl + shift - e : LAYOUT=$(yabai -m query --spaces | jq -r '.[0].type'); if [ "$LAYOUT" = "bsp" ]; then for i in $(seq 1 6); do yabai -m space $i --layout float; done; borders whitelist="none"; else for i in $(seq 1 6); do yabai -m space $i --layout bsp; done; borders whitelist="" active_color=0xffffffff inactive_color=0xff444444 width=4.0; fi; sketchybar --trigger yabai_focus_change
 ctrl - s : ~/.local/bin/yabai-stack-last
 ctrl - b : yabai -m space --balance
 
